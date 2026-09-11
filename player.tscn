@@ -10,7 +10,23 @@ animations = [{
 "texture": ExtResource("1_4flbx")
 }],
 "loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4flbx")
+}],
+"loop": 1,
 "name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4flbx")
+}],
+"loop": 1,
+"name": &"crouch attack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -41,7 +57,7 @@ metadata/_edit_group_ = true
 position = Vector2(0, 2.3841858e-07)
 scale = Vector2(0.1, 0.159375)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
-animation = &"still"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
 shape = SubResource("RectangleShape2D_s71dy")

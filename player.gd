@@ -18,17 +18,25 @@ func _physics_process(delta: float) -> void:
 		#handle attacking
 		pass
 	
-	if Input.is_action_just_pressed("Select"):
-		#switch weapon
+	if Input.is_action_pressed("Up D-Pad") and Input.is_action_just_pressed("B Button"):
+		#perform second selected attack
 		pass
-		
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
-	if direction:
-		velocity.x = direction * SPEED
+	
+	if Input.is_action_just_pressed("Select"):
+		#switch second weapon
+		pass
+	
+	if Input.is_action_pressed("Down D-Pad"):
+		#prevent movement and attacks should be different with different animation
+		pass
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	move_and_slide()
+		move_and_slide()
 	#Is move_and_slide correct?
