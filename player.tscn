@@ -43,7 +43,5 @@ scale = Vector2(0.1, 0.159375)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
 animation = &"still"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1737038334]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
 shape = SubResource("RectangleShape2D_s71dy")
