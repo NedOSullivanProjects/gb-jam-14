@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 10.0
-const JUMP_VELOCITY = -20.0#Temp values should be changed
+const SPEED = 100.0
+const JUMP_VELOCITY = -200.0#Temp values should be changed
 var lastXVelocity = 0
 
 func _physics_process(delta: float) -> void:
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("Down D-Pad"):
 		#prevent movement and attacks should be different with different animation
 		pass
-	else:
+	elif is_on_floor():
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
