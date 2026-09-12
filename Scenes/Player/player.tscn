@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://butbqoumvop24"]
+
+[ext_resource type="Script" uid="uid://chbojrpvv4xvj" path="res://Scripts/Player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://cb033sjtdtgty" path="res://Images/Player/player.png" id="2_xpcdj"]
+[ext_resource type="Texture2D" uid="uid://d32p7cs43vod5" path="res://Images/Player/player walk.png" id="3_i3pqv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtuoh"]
+atlas = ExtResource("2_xpcdj")
+region = Rect2(48, 0, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(0, 0, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(0, 0, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(16, 0, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(32, 0, 16, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x1b0w"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtuoh")
+}],
+"loop": 1,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"crouch attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}],
+"loop": 1,
+"name": &"still",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s71dy"]
+size = Vector2(13, 28)
+
+[node name="Player" type="CharacterBody2D" unique_id=201301138]
+script = ExtResource("1_onrkg")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=656297595]
+texture_filter = 1
+position = Vector2(0, 2.3841858e-07)
+sprite_frames = SubResource("SpriteFrames_x1b0w")
+animation = &"crouch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_s71dy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1178028175]
