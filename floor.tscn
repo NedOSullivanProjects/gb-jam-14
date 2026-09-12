@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://qnq1n5sk7xxr"]
+
+[ext_resource type="Texture2D" uid="uid://ssrn2xdweian" path="res://Images/icon.svg" id="1_oj3tl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrivr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_oj3tl")
+}],
+"loop": 1,
+"name": &"Placeholder",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(38, 13)
+
+[node name="Floor" type="StaticBody2D" unique_id=2114804160]
+collision_mask = 0
+
+[node name="Art" type="AnimatedSprite2D" parent="." unique_id=1910263160]
+position = Vector2(71, 87)
+scale = Vector2(0.3, 0.1)
+sprite_frames = SubResource("SpriteFrames_xrivr")
+animation = &"Placeholder"
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2133128333]
+position = Vector2(71, 87.5)
+shape = SubResource("RectangleShape2D_xrivr")
