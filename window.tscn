@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b4ylqpw07vws2"]
+
+[ext_resource type="Texture2D" uid="uid://dsedxfmnarnin" path="res://Images/Window.png" id="1_mvsta"]
+
+[node name="Window" type="TextureRect" unique_id=946476856]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 44.0
+offset_bottom = 44.0
+texture = ExtResource("1_mvsta")

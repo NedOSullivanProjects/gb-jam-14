@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://rs7qu8xe3fyw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrivr"]
+
+[node name="Door" type="Area2D" unique_id=1759039813]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1079919317]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1820031149]
+sprite_frames = SubResource("SpriteFrames_xrivr")

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://4qk4smrnwweo"]
+
+[ext_resource type="Texture2D" uid="uid://cpgioeoxaednw" path="res://Images/Test Background.png" id="1_oabld"]
+[ext_resource type="PackedScene" uid="uid://b4ylqpw07vws2" path="res://window.tscn" id="2_i7s6n"]
+
+[node name="Background" type="CanvasLayer" unique_id=972493209]
+layer = -2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1450846818]
+texture_filter = 1
+texture_repeat = 2
+offset_right = 160.0
+offset_bottom = 144.0
+texture = ExtResource("1_oabld")
+stretch_mode = 1
+
+[node name="Window" parent="." unique_id=946476856 instance=ExtResource("2_i7s6n")]
+offset_left = 23.0
+offset_top = 50.0
+offset_right = 43.0
+offset_bottom = 70.0
+
+[node name="Window2" parent="." unique_id=2069601163 instance=ExtResource("2_i7s6n")]
+offset_left = 53.0
+offset_top = 49.0
+offset_right = 73.0
+offset_bottom = 69.0

@@ -18,6 +18,7 @@ config/icon="res://Images/icon.svg"
 
 window/size/viewport_width=160
 window/size/viewport_height=144
+window/size/mode=4
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
@@ -93,6 +94,7 @@ Start={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

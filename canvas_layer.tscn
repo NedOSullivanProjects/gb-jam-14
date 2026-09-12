@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bsvbwukpg6coe"]
+
+[ext_resource type="Texture2D" uid="uid://bg6fwv60wyutw" path="res://Images/candle.png" id="1_v2lfg"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1994206373]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1814930267]
+offset_left = 66.0
+offset_top = 57.0
+offset_right = 74.0
+offset_bottom = 65.0
+texture = ExtResource("1_v2lfg")
