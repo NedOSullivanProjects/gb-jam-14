@@ -18,13 +18,13 @@ size = Vector2(38, 13)
 
 [node name="Floor" type="StaticBody2D" unique_id=2114804160]
 collision_mask = 0
+metadata/_edit_group_ = true
 
 [node name="Art" type="AnimatedSprite2D" parent="." unique_id=1910263160]
-position = Vector2(71, 87)
+position = Vector2(0.20000076, -0.5999999)
 scale = Vector2(0.3, 0.1)
 sprite_frames = SubResource("SpriteFrames_xrivr")
 animation = &"Placeholder"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2133128333]
-position = Vector2(71, 87.5)
 shape = SubResource("RectangleShape2D_xrivr")
