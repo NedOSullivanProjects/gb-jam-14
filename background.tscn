@@ -15,10 +15,10 @@ texture = ExtResource("1_oabld")
 stretch_mode = 1
 
 [node name="Window" parent="." unique_id=946476856 instance=ExtResource("2_i7s6n")]
-offset_left = 23.0
-offset_top = 50.0
-offset_right = 43.0
-offset_bottom = 70.0
+offset_left = 25.0
+offset_top = 49.0
+offset_right = 45.0
+offset_bottom = 69.0
 
 [node name="Window2" parent="." unique_id=2069601163 instance=ExtResource("2_i7s6n")]
 offset_left = 53.0
