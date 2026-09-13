@@ -71,7 +71,11 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s71dy"]
-size = Vector2(13, 28)
+size = Vector2(13, 27)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdom2"]
+radius = 5.0
+height = 28.0
 
 [node name="Player" type="CharacterBody2D" unique_id=201301138]
 script = ExtResource("1_onrkg")
@@ -81,14 +85,34 @@ metadata/_edit_group_ = true
 texture_filter = 1
 position = Vector2(0, 2.3841858e-07)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
-animation = &"crouch"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
-position = Vector2(-0.5, 0)
+position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_s71dy")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1178028175]
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=1672228629]
+[node name="StandingHitbox" type="Area2D" parent="." unique_id=1672228629]
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1472465968]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StandingHitbox" unique_id=1472465968]
+shape = SubResource("CapsuleShape2D_fdom2")
+
+[node name="InvulnTimer" type="Timer" parent="." unique_id=1154370226]
+wait_time = 2.0
+one_shot = true
+
+[node name="FlashingTimer" type="Timer" parent="." unique_id=1650909748]
+wait_time = 0.5
+one_shot = true
+
+[node name="PauseTimer" type="Timer" parent="FlashingTimer" unique_id=261450500]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="body_entered" from="StandingHitbox" to="." method="_on_standing_hitbox_body_entered"]
+[connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
+[connection signal="timeout" from="FlashingTimer" to="." method="_on_flashing_timer_timeout"]
+[connection signal="timeout" from="FlashingTimer/PauseTimer" to="." method="_on_pause_timer_timeout"]
