@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://2vfqpor17i8"]
+
+[ext_resource type="Script" uid="uid://cx04ajbs4kpxw" path="res://label.gd" id="1_yg5m5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yg5m5"]
+
+[node name="Label" type="Label" unique_id=117810572]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_yg5m5")
+script = ExtResource("1_yg5m5")

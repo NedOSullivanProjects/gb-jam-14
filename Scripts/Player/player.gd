@@ -5,6 +5,10 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -200.0#Temp values should be changed
 var lastXVelocity = 0
 
+signal spikes #used to signal player has taken damage from spikes
+
+var recently_hit = false #this will be used to give the player invulnerability frames
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -47,3 +51,32 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	#Is move_and_slide correct?
+
+
+#Triggers when the player hits spikes, could be used for all 
+func _on_standing_hitbox_body_entered(body: Node2D) -> void:
+	if !recently_hit: #if player is not invulnerable, emits that they have been damaged
+		spikes.emit()
+		recently_hit = true
+		$InvulnTimer.start()
+		$FlashingTimer/PauseTimer.start()
+		hide()
+	elif recently_hit: #if the player is currently invulnerable, skips function
+		
+		pass
+
+func _on_invuln_timer_timeout() -> void: #Stops invulnerability animation from playing and makes player vulnerable again
+	recently_hit = false
+	$FlashingTimer.stop()
+	$FlashingTimer/PauseTimer.stop()
+	show()
+
+
+func _on_flashing_timer_timeout() -> void: # Flashing and pause both trigger off each other to make the players animation flash without pausing its movement animations
+	hide()
+	$FlashingTimer/PauseTimer.start()
+
+
+func _on_pause_timer_timeout() -> void:
+	show()
+	$FlashingTimer.start()
