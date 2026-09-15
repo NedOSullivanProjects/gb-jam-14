@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://caqdn2dgv15p7"]
+
+[ext_resource type="Script" uid="uid://e2ihvpqnwl7w" path="res://Scenes/Enemies/zombie.gd" id="1_ivbwk"]
+[ext_resource type="Texture2D" uid="uid://clxicbhnjrvxw" path="res://Images/Enemy/ZombieEnemy.png" id="1_k6tf2"]
+[ext_resource type="PackedScene" uid="uid://cq0knbfvlkdqa" path="res://Scenes/Components/pathfinding.tscn" id="3_epfg0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsmrm"]
+atlas = ExtResource("1_k6tf2")
+region = Rect2(16, 0, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivbwk"]
+atlas = ExtResource("1_k6tf2")
+region = Rect2(0, 0, 16, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x1b0w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsmrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivbwk")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnob4"]
+size = Vector2(15, 27)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epfg0"]
+radius = 8.0
+height = 28.0
+
+[node name="Zombie" type="CharacterBody2D" unique_id=792462336]
+script = ExtResource("1_ivbwk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=153792820]
+sprite_frames = SubResource("SpriteFrames_x1b0w")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1475700554]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_dnob4")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1293887074]
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox" unique_id=379223022]
+shape = SubResource("CapsuleShape2D_epfg0")
+
+[node name="Pathfinding" parent="." unique_id=2098799708 instance=ExtResource("3_epfg0")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1756025761]
