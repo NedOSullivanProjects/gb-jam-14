@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://butbqoumvop24"]
 
 [ext_resource type="Script" uid="uid://chbojrpvv4xvj" path="res://Scripts/Player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://b1fjuo6046vkh" path="res://Images/Player/crawlspritesheet.png" id="2_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://cb033sjtdtgty" path="res://Images/Player/player.png" id="2_xpcdj"]
 [ext_resource type="Texture2D" uid="uid://d32p7cs43vod5" path="res://Images/Player/player walk.png" id="3_i3pqv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htcer"]
+atlas = ExtResource("2_mtuoh")
+region = Rect2(21, 8, 14, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd0ac"]
+atlas = ExtResource("2_mtuoh")
+region = Rect2(35, 8, 14, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u5uq"]
+atlas = ExtResource("2_mtuoh")
+region = Rect2(49, 8, 14, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtuoh"]
 atlas = ExtResource("2_xpcdj")
@@ -33,6 +46,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_htcer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd0ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u5uq")
+}],
+"loop": 1,
+"name": &"crawl",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mtuoh")
 }],
 "loop": 1,
@@ -42,6 +69,11 @@ animations = [{
 "frames": [],
 "loop": 1,
 "name": &"crouch attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"new_animation",
 "speed": 5.0
 }, {
 "frames": [{
@@ -85,7 +117,7 @@ metadata/_edit_group_ = true
 texture_filter = 1
 position = Vector2(0, 2.3841858e-07)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
-animation = &"walk"
+animation = &"crawl"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
 position = Vector2(-0.5, -0.5)

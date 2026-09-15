@@ -9,6 +9,7 @@ signal spikes #used to signal player has taken damage from spikes
 
 var recently_hit = false #this will be used to give the player invulnerability frames
 
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -20,6 +21,7 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
 		if direction:
 			lastXVelocity = direction * SPEED
+			$AnimatedSprite2D.flip_h = lastXVelocity > 0
 		else:
 			lastXVelocity = 0
 
@@ -40,13 +42,17 @@ func _physics_process(delta: float) -> void:
 		#prevent movement and attacks should be different with different animation
 		pass
 	elif is_on_floor():
+		$AnimatedSprite2D.animation = "walk"
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
 		if direction:
 			velocity.x = direction * SPEED
+			$AnimatedSprite2D.flip_h = velocity.x > 0
+			$AnimatedSprite2D.play()
 		else:
 			#velocity.x = move_toward(velocity.x, 0, SPEED)
+			$AnimatedSprite2D.stop()
 			velocity.x = 0
 
 	move_and_slide()
