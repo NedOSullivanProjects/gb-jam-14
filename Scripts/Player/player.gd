@@ -58,6 +58,7 @@ func _on_standing_hitbox_body_entered(body: Node2D) -> void:
 	if !recently_hit: #if player is not invulnerable, emits that they have been damaged
 		spikes.emit()
 		recently_hit = true
+		$FmodEventEmitter2D.start()
 		$InvulnTimer.start()
 		$FlashingTimer/PauseTimer.start()
 		hide()

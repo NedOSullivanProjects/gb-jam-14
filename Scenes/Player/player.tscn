@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://chbojrpvv4xvj" path="res://Scripts/Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cb033sjtdtgty" path="res://Images/Player/player.png" id="2_xpcdj"]
 [ext_resource type="Texture2D" uid="uid://d32p7cs43vod5" path="res://Images/Player/player walk.png" id="3_i3pqv"]
+[ext_resource type="FmodBank" uid="uid://dw6rpslau5ggx" path="res://FModTest/Desktop/Master.bank" id="4_mtuoh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtuoh"]
 atlas = ExtResource("2_xpcdj")
@@ -93,6 +94,8 @@ shape = SubResource("RectangleShape2D_s71dy")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1178028175]
 
+[node name="FmodListener2D" type="FmodListener2D" parent="Camera2D" unique_id=1349898969]
+
 [node name="StandingHitbox" type="Area2D" parent="." unique_id=1672228629]
 collision_layer = 2
 collision_mask = 2
@@ -111,6 +114,12 @@ one_shot = true
 [node name="PauseTimer" type="Timer" parent="FlashingTimer" unique_id=261450500]
 wait_time = 0.25
 one_shot = true
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1063877826]
+banks = Array[FmodBank]([ExtResource("4_mtuoh")])
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="." unique_id=925043232]
+event = Vector4i(1170364896, 1176912641, -1073869391, 2103422340)
 
 [connection signal="body_entered" from="StandingHitbox" to="." method="_on_standing_hitbox_body_entered"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
