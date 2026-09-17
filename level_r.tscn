@@ -140,7 +140,8 @@ tile_set = SubResource("TileSet_b1lj4")
 position = Vector2(19, 94)
 
 [node name="Zombie" parent="." unique_id=792462336 node_paths=PackedStringArray("targetNode") instance=ExtResource("4_ynbxx")]
-position = Vector2(65, 94)
+position = Vector2(239, 76)
+collision_layer = 6
 targetNode = NodePath("../Player")
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=2115718544]
