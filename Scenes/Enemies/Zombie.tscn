@@ -34,11 +34,16 @@ radius = 8.0
 height = 28.0
 
 [node name="Zombie" type="CharacterBody2D" unique_id=792462336]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_ivbwk")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=153792820]
 sprite_frames = SubResource("SpriteFrames_x1b0w")
 animation = &"walk"
+frame = 1
+frame_progress = 0.31820324
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1475700554]
 position = Vector2(-0.5, 0.5)
@@ -52,3 +57,6 @@ shape = SubResource("CapsuleShape2D_epfg0")
 [node name="Pathfinding" parent="." unique_id=2098799708 instance=ExtResource("3_epfg0")]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1756025761]
+rect = Rect2(-9, -15, 19, 30)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

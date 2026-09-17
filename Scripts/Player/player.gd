@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -200.0#Temp values should be changed
+const JUMP_VELOCITY = -250.0#Temp values should be changed
 var lastXVelocity = 0
 
 signal spikes #used to signal player has taken damage from spikes
