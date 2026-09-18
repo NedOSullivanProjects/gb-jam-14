@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://e2ihvpqnwl7w" path="res://Scenes/Enemies/zombie.gd" id="1_ivbwk"]
 [ext_resource type="Texture2D" uid="uid://clxicbhnjrvxw" path="res://Images/Enemy/ZombieEnemy.png" id="1_k6tf2"]
 [ext_resource type="PackedScene" uid="uid://cq0knbfvlkdqa" path="res://Scenes/Components/pathfinding.tscn" id="3_epfg0"]
+[ext_resource type="PackedScene" uid="uid://dasnmt08egk37" path="res://Scenes/Components/health_component.tscn" id="4_epfg0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gsmrm"]
 atlas = ExtResource("1_k6tf2")
@@ -58,5 +59,7 @@ shape = SubResource("CapsuleShape2D_epfg0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1756025761]
 rect = Rect2(-9, -15, 19, 30)
+
+[node name="HealthComponent" parent="." unique_id=1650194730 instance=ExtResource("4_epfg0")]
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
