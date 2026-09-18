@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var maxHealth = 5
-
+@export var currentHealth = maxHealth
 const SPEED = 100.0
 const JUMP_VELOCITY = -250.0#Temp values should be changed
 var lastXVelocity = 0
@@ -16,6 +16,7 @@ signal spikes #used to signal player has taken damage from spikes
 var recently_hit = false #this will be used to give the player invulnerability frames
 
 signal onFloor
+
 
 
 
@@ -95,10 +96,13 @@ func _on_standing_hitbox_body_entered(body: Node2D) -> void:
 
 func _process(delta:float) -> void:
 	if onHitboxDamage:
+		$StandingHitbox/CollisionShape2D.set_deferred("disabled",true) #Disables collision till the end of the frame (Not the reason why the lives were being instantly lost
 		if !recently_hit: #if player is not invulnerable, emits that they have been damaged
 			jump_animation()
 			ouch($AnimatedSprite2D.flip_h)
 			spikes.emit()
+			print("hit!")
+			$HealthComponent.TakeDamage(1) # on second instance of damage, HealthComponent is no longer there?? Something like that, perhaps my code is somehow deleting healthcomponent in life.gd????
 			recently_hit = true
 			$InvulnTimer.start()
 			$FlashingTimer/PauseTimer.start()
@@ -117,6 +121,7 @@ func _on_invuln_timer_timeout() -> void: #Stops invulnerability animation from p
 	recently_hit = false
 	$FlashingTimer.stop()
 	$FlashingTimer/PauseTimer.stop()
+	$StandingHitbox/CollisionShape2D.disabled = false
 	show()
 
 
@@ -150,3 +155,8 @@ func ouch(directionFacing:bool) -> void:
 		velocity.y = JUMP_VELOCITY
 		velocity.x = SPEED
 		print(velocity.x)
+
+
+
+func _on_health_component_damage_taken(oldHealth: Variant, newHealth: Variant) -> void:
+	currentHealth = newHealth

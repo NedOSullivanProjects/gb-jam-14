@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://cgtqobrobh2bt"]
 
+[ext_resource type="Script" uid="uid://0h8cvs0awawo" path="res://life.gd" id="1_37p78"]
+[ext_resource type="Script" uid="uid://1buxr8yrrrkr" path="res://hud.gd" id="1_64ctp"]
+
 [node name="HUD" type="MarginContainer" unique_id=350386090]
 offset_right = 160.0
 offset_bottom = 144.0
+script = ExtResource("1_64ctp")
 
 [node name="Bar" type="VBoxContainer" parent="." unique_id=27113097]
 layout_mode = 2
 
 [node name="Life" type="HBoxContainer" parent="Bar" unique_id=1604104129]
+z_index = 4
 layout_mode = 2
+script = ExtResource("1_37p78")
