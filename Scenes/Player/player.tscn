@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://chbojrpvv4xvj" path="res://Scripts/Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cb033sjtdtgty" path="res://Images/Player/player.png" id="2_xpcdj"]
 [ext_resource type="Texture2D" uid="uid://d32p7cs43vod5" path="res://Images/Player/player walk.png" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://dasnmt08egk37" path="res://Scenes/Components/health_component.tscn" id="4_mtuoh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtuoh"]
 atlas = ExtResource("2_xpcdj")
@@ -111,6 +112,9 @@ one_shot = true
 [node name="PauseTimer" type="Timer" parent="FlashingTimer" unique_id=261450500]
 wait_time = 0.25
 one_shot = true
+
+[node name="HealthComponent" parent="." unique_id=1650194730 instance=ExtResource("4_mtuoh")]
+maxHealth = 10
 
 [connection signal="body_entered" from="StandingHitbox" to="." method="_on_standing_hitbox_body_entered"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
