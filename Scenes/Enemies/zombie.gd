@@ -2,11 +2,14 @@ extends CharacterBody2D
 
 @export var targetNode : Node2D
 
+@export var maxHealth : int
+
 const SPEED = 50.0
 const JUMP_VELOCITY = -200.0
 
 func _ready()-> void:
 	$Pathfinding.setTargetNode(targetNode)
+	
 	
 var direction: Vector2 = Vector2(0,0)
 

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cgtqobrobh2bt"]
+
+[node name="HUD" type="MarginContainer" unique_id=350386090]
+offset_right = 160.0
+offset_bottom = 144.0
+
+[node name="Bar" type="VBoxContainer" parent="." unique_id=27113097]
+layout_mode = 2
+
+[node name="Life" type="HBoxContainer" parent="Bar" unique_id=1604104129]
+layout_mode = 2
