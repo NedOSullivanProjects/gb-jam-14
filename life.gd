@@ -15,21 +15,23 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	pass
+	
+func _on_health_component_damage_taken(oldHealth: Variant, newHealth: Variant) -> void:
+	print("oldHealth " + str(oldHealth))
+	print("newHealth " + str(newHealth))
+	if oldHealth <= 0:
+		return
 	var healthPaths = []
 	var healthList := get_tree().get_nodes_in_group("HealthBar") # Creates a list of the nodes in group HealthBar
+	healthList.pop_back() #remove HealthComponant
 	for i in range (0,len(healthList)):
 		healthPaths.append(healthList[i].get_path()) #Turns those nodes into a list of paths to that node
-		#print(len(healthList))
-		#print(actor.currentHealth)
-		#print(tempHealth) 
-		#print("----") # Debugging print statements
-	if actor.currentHealth < tempHealth: 
-		var healthToChange = tempHealth - actor.currentHealth
-		for i in range (0, healthToChange):
-			var Temp = get_node(healthPaths[-1]) #Gives temp the node path of the furthest right health icon
-			print(Temp)
-			Temp.queue_free() #Clears the node path stored in temp
-		tempHealth = actor.currentHealth # Without this line, the code failed to stop the player losing health forever, but with it, the player does not lose health anymore, unsure why
-	else:
-		pass
+	var healthToChange = oldHealth - newHealth
+	print("damage taken = " + str(healthToChange))
+	for i in range (0, healthToChange):
+		var Temp = get_node(healthPaths.pop_front()) #Gives temp the node path of the furthest right health icon
+		Temp.queue_free() #Clears the node path stored in temp
 	
+	#comment of shame
+	#tempHealth = actor.currentHealth # Without this line, the code failed to stop the player losing health forever, but with it, the player does not lose health anymore, unsure why
