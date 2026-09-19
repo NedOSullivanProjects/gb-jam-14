@@ -104,6 +104,7 @@ func _process(delta:float) -> void:
 			print("hit!")
 			$HealthComponent.TakeDamage(1) # on second instance of damage, HealthComponent is no longer there?? Something like that, perhaps my code is somehow deleting healthcomponent in life.gd????
 			recently_hit = true
+			$FmodEventEmitter2D.play_one_shot()
 			$InvulnTimer.start()
 			$FlashingTimer/PauseTimer.start()
 			hide()

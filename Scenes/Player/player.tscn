@@ -103,6 +103,8 @@ shape = SubResource("RectangleShape2D_s71dy")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1178028175]
 
+[node name="FmodListener2D" type="FmodListener2D" parent="Camera2D" unique_id=1823473559]
+
 [node name="StandingHitbox" type="Area2D" parent="." unique_id=1672228629]
 collision_layer = 2
 collision_mask = 2
@@ -124,6 +126,14 @@ one_shot = true
 
 [node name="HealthComponent" parent="." unique_id=1650194730 instance=ExtResource("4_mtuoh")]
 maxHealth = 10
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=2041050054]
+bank_paths = ["res://Sound/SoundBanks/Desktop/Player.bank", "res://Sound/SoundBanks/Desktop/Master.bank"]
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="." unique_id=171485708]
+event_name = "event:/DamageTakenEvent"
+event_guid = "{dc4b3f88-44e5-4feb-b6a2-20b6c42fb994}"
+volume = 0.5
 
 [connection signal="body_entered" from="StandingHitbox" to="." method="_on_standing_hitbox_body_entered"]
 [connection signal="body_exited" from="StandingHitbox" to="." method="_on_standing_hitbox_body_exited"]
