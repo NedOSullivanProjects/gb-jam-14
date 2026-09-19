@@ -8,12 +8,20 @@
 
 config_version=5
 
+[Fmod]
+
+General/banks_path="res://Sound/SoundBanks/Desktop"
+
 [application]
 
 config/name="GBJam14"
 run/main_scene="uid://p7a7btdewxdu"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://Images/icon.svg"
+
+[autoload]
+
+FmodManager="*uid://cds10pm7hwn3p"
 
 [display]
 
@@ -22,6 +30,10 @@ window/size/viewport_height=144
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
 
 [input]
 
