@@ -76,7 +76,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 3.0
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s71dy"]
@@ -94,7 +94,8 @@ metadata/_edit_group_ = true
 texture_filter = 1
 position = Vector2(0, 2.3841858e-07)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
-animation = &"still"
+animation = &"walk"
+frame_progress = 0.5241351
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
 position = Vector2(-0.5, -0.5)

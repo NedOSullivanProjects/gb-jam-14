@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @export var maxHealth : int
 
-const SPEED = 50.0
+const SPEED = 20.0
 const JUMP_VELOCITY = -200.0
 
 func _ready()-> void:
@@ -34,3 +34,4 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	show()
 	direction = $Pathfinding.simpleFindPath(self.global_position)
 	$AnimatedSprite2D.flip_h = direction.x > 0
+	$AnimatedSprite2D.play()
