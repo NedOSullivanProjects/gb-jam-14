@@ -59,10 +59,15 @@ func _physics_process(delta: float) -> void:
 		#switch second weapon
 		pass
 	
-	if Input.is_action_pressed("Down D-Pad"):
-		#prevent movement and attacks should be different with different animation
+	if Input.is_action_pressed("Down D-Pad") and is_on_floor():
+		velocity.x = 0
+		$AnimatedSprite2D.animation = "crouch"
+		$StandingHitbox/CollisionShape2D.disabled = true
+		$CrouchingHitbox/CollisionShape2D.disabled = false
 		pass
 	elif is_on_floor():
+		$StandingHitbox/CollisionShape2D.disabled = false
+		$CrouchingHitbox/CollisionShape2D.disabled = true
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
@@ -75,7 +80,9 @@ func _physics_process(delta: float) -> void:
 			#velocity.x = move_toward(velocity.x, 0, SPEED)
 			$AnimatedSprite2D.animation = "still"
 			velocity.x = 0
-	
+	else:
+		$StandingHitbox/CollisionShape2D.disabled = false
+		$CrouchingHitbox/CollisionShape2D.disabled = true
 	move_and_slide()
 
 		#Is move_and_slide correct?
