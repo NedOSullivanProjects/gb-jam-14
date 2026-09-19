@@ -6,11 +6,9 @@ var tempHealth : int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tempHealth = actor.maxHealth
-	print(actor.maxHealth)
 	for i in range(0,actor.maxHealth):
 		var healthBar = healthIcon.instantiate()
 		add_child(healthBar)
-		print (i)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,19 +16,16 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_health_component_damage_taken(oldHealth: Variant, newHealth: Variant) -> void:
-	print("oldHealth " + str(oldHealth))
-	print("newHealth " + str(newHealth))
 	if oldHealth <= 0:
 		return
 	var healthPaths = []
 	var healthList := get_tree().get_nodes_in_group("HealthBar") # Creates a list of the nodes in group HealthBar
-	healthList.pop_back() #remove HealthComponant
+	#healthList.pop_back() #remove HealthComponant
 	for i in range (0,len(healthList)):
 		healthPaths.append(healthList[i].get_path()) #Turns those nodes into a list of paths to that node
 	var healthToChange = oldHealth - newHealth
-	print("damage taken = " + str(healthToChange))
 	for i in range (0, healthToChange):
-		var Temp = get_node(healthPaths.pop_front()) #Gives temp the node path of the furthest right health icon
+		var Temp = get_node(healthPaths.pop_back()) #Gives temp the node path of the furthest right health icon
 		Temp.queue_free() #Clears the node path stored in temp
 	
 	#comment of shame
