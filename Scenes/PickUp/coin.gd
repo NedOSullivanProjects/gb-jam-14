@@ -9,3 +9,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		#Player.add_gold(amount)
+		self.queue_free()
