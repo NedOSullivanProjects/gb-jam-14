@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bxotndhmioas1"]
+
+[ext_resource type="Texture2D" uid="uid://br2wj3q28s0yh" path="res://Images/HUD/Health2.png" id="1_4s0pq"]
+[ext_resource type="Script" uid="uid://bdi62i0djm6s1" path="res://health_icon.gd" id="2_u4m8f"]
+
+[node name="Health icon" type="TextureRect" unique_id=1480000558 groups=["HealthBar"]]
+custom_minimum_size = Vector2(10, 10)
+offset_right = 10.0
+offset_bottom = 10.0
+texture = ExtResource("1_4s0pq")
+expand_mode = 1
+script = ExtResource("2_u4m8f")

@@ -154,12 +154,8 @@ offset_right = 161.0
 actor = NodePath("../../../../..")
 healthIcon = ExtResource("6_2eopd")
 
-[node name="Camera2D" parent="Player" index="2" unique_id=1178028175]
-limit_left = 1
-limit_bottom = 144
-
-[node name="HealthComponent" parent="Player" index="6" unique_id=1650194730]
-maxHealth = 9
+[node name="HealthComponent" parent="Player" index="6" unique_id=1650194730 groups=["HealthBar"]]
+maxHealth = 11
 
 [node name="Zombie" parent="." unique_id=792462336 node_paths=PackedStringArray("targetNode") instance=ExtResource("4_ynbxx")]
 position = Vector2(239, 76)

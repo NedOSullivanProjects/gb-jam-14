@@ -1,11 +1,10 @@
 extends Node2D
 
-@export var maxHealth : int
-
+@export var maxHealth = 9
 var currentHealth : int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	InitialiseHealth() #set health to max
 
 signal died
 
