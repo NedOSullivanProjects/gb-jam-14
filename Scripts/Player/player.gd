@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var maxHealth = 5
 @export var currentHealth = maxHealth
+var gold = 0
 const SPEED = 50.0
 const JUMP_VELOCITY = -250.0#Temp values should be changed
 var lastXVelocity = 0
@@ -18,7 +19,7 @@ var recently_hit = false #this will be used to give the player invulnerability f
 signal onFloor
 
 
-
+signal gotGold(amount:int)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -168,3 +169,8 @@ func ouch(directionFacing:bool) -> void:
 
 func _on_health_component_damage_taken(oldHealth: Variant, newHealth: Variant) -> void:
 	currentHealth = newHealth
+
+func add_gold(amount: int):
+	gold += amount
+	#print("got here")
+	gotGold.emit(gold)
