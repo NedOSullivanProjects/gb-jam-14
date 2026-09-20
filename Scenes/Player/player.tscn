@@ -98,7 +98,7 @@ metadata/_edit_group_ = true
 texture_filter = 1
 position = Vector2(0, 2.3841858e-07)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
-animation = &"crouch"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
 position = Vector2(-0.5, -0.5)
