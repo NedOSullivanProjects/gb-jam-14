@@ -186,7 +186,6 @@ maxHealth = 9
 
 [node name="Zombie" parent="." unique_id=792462336 node_paths=PackedStringArray("targetNode") instance=ExtResource("4_ynbxx")]
 position = Vector2(239, 76)
-collision_layer = 6
 targetNode = NodePath("../Player")
 maxHealth = 1
 

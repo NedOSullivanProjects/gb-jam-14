@@ -2,12 +2,39 @@
 
 [ext_resource type="Script" uid="uid://chbojrpvv4xvj" path="res://Scripts/Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cb033sjtdtgty" path="res://Images/Player/player.png" id="2_xpcdj"]
+[ext_resource type="Texture2D" uid="uid://ncqt4i5kcpki" path="res://Images/Player/playerAttack2.png" id="3_htcer"]
 [ext_resource type="Texture2D" uid="uid://d32p7cs43vod5" path="res://Images/Player/player walk.png" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://dasnmt08egk37" path="res://Scenes/Components/health_component.tscn" id="4_mtuoh"]
+[ext_resource type="Script" uid="uid://dtkfakmx5w5lh" path="res://Scenes/Player/Crouch_Attack_Face.gd" id="6_0u5uq"]
+[ext_resource type="Script" uid="uid://qdu14e55y75y" path="res://Scenes/Player/Stand_Attack_Face.gd" id="6_dd0ac"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtuoh"]
 atlas = ExtResource("2_xpcdj")
 region = Rect2(48, 0, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd0ac"]
+atlas = ExtResource("3_htcer")
+region = Rect2(0, 0, 36, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u5uq"]
+atlas = ExtResource("3_htcer")
+region = Rect2(36, 0, 36, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlvik"]
+atlas = ExtResource("3_htcer")
+region = Rect2(72, 0, 36, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk6dx"]
+atlas = ExtResource("3_htcer")
+region = Rect2(108, 0, 36, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhyir"]
+atlas = ExtResource("3_htcer")
+region = Rect2(144, 0, 36, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74mp2"]
+atlas = ExtResource("3_htcer")
+region = Rect2(180, 0, 36, 29)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
 atlas = ExtResource("3_i3pqv")
@@ -35,8 +62,17 @@ animations = [{
 "name": &"Jump",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd0ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u5uq")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_jlvik")
+}],
+"loop": 0,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -48,8 +84,17 @@ animations = [{
 "name": &"crouch",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk6dx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhyir")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_74mp2")
+}],
+"loop": 0,
 "name": &"crouch attack",
 "speed": 5.0
 }, {
@@ -90,6 +135,12 @@ height = 28.0
 radius = 6.666667
 height = 29.333334
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1b0w"]
+size = Vector2(20, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnob4"]
+size = Vector2(20, 3)
+
 [node name="Player" type="CharacterBody2D" unique_id=201301138]
 script = ExtResource("1_onrkg")
 metadata/_edit_group_ = true
@@ -98,7 +149,7 @@ metadata/_edit_group_ = true
 texture_filter = 1
 position = Vector2(0, 2.3841858e-07)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
-animation = &"walk"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
 position = Vector2(-0.5, -0.5)
@@ -147,8 +198,33 @@ position = Vector2(0, 3)
 scale = Vector2(0.75, 0.75)
 shape = SubResource("CapsuleShape2D_x1b0w")
 
+[node name="CrouchAttackHitbox" type="Area2D" parent="." unique_id=1227630019]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrouchAttackHitbox" unique_id=1280307784]
+position = Vector2(-8, 3)
+shape = SubResource("RectangleShape2D_x1b0w")
+script = ExtResource("6_0u5uq")
+leftPos = Vector2(-8, 3)
+rightPos = Vector2(8, 3)
+
+[node name="StandAttackHitbox" type="Area2D" parent="." unique_id=1399467227]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StandAttackHitbox" unique_id=876772350]
+position = Vector2(-8, -4)
+shape = SubResource("RectangleShape2D_dnob4")
+script = ExtResource("6_dd0ac")
+leftPos = Vector2(-8, -4)
+rightPos = Vector2(8, -4)
+
+[connection signal="changeFacingDirection" from="." to="CrouchAttackHitbox/CollisionShape2D" method="_on_player_change_facing_direction"]
+[connection signal="changeFacingDirection" from="." to="StandAttackHitbox/CollisionShape2D" method="_on_player_change_facing_direction"]
 [connection signal="body_entered" from="StandingHitbox" to="." method="_on_standing_hitbox_body_entered"]
 [connection signal="body_exited" from="StandingHitbox" to="." method="_on_standing_hitbox_body_exited"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_flashing_timer_timeout"]
 [connection signal="timeout" from="FlashingTimer/PauseTimer" to="." method="_on_pause_timer_timeout"]
+[connection signal="body_entered" from="CrouchingHitbox" to="." method="_on_crouching_hitbox_body_entered"]
