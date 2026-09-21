@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://wi17kn71hgvk"]
+
+[ext_resource type="Script" uid="uid://bkor5j86o55oe" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://dyjd6fcpmcjlt" path="res://intro.png" id="1_ig7tw"]
+[ext_resource type="FontFile" uid="uid://eeqaqxih3dw7" path="res://fonts/pixelated-elegance-font/PixelatedEleganceRegular-ovawB.ttf" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dtmwh44q0vawk" path="res://gold_label.gd" id="3_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=588513595]
+script = ExtResource("1_1bvp3")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=777832352]
+offset_right = 160.0
+offset_bottom = 144.0
+texture = ExtResource("1_ig7tw")
+
+[node name="goldLabel" type="Label" parent="." unique_id=964996599]
+offset_left = 59.0
+offset_top = 79.0
+offset_right = 113.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+theme_override_colors/font_outline_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 5
+text = "Press Start"
+horizontal_alignment = 1
+script = ExtResource("3_h2yge")
+
+[node name="Timer" type="Timer" parent="goldLabel" unique_id=2046264219]
+wait_time = 0.2
+autostart = true
+
+[node name="Credits" type="Label" parent="." unique_id=1403097037]
+offset_left = 1.0
+offset_top = 123.0
+offset_right = 177.0
+offset_bottom = 144.0
+theme_override_colors/font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+theme_override_colors/font_outline_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 4
+text = "Coding: Jam Badguy, Lolsalot12321, SomePersonThe4th
+Music: SomePersonThe4th
+Art: Jam Badguy, Lolsalot12321"
+
+[connection signal="timeout" from="goldLabel/Timer" to="goldLabel" method="_on_timer_timeout"]

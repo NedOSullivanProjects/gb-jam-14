@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cb7hv4buaa6tn"]
+
+[ext_resource type="Texture2D" uid="uid://dyjd6fcpmcjlt" path="res://intro.png" id="1_kc4hn"]
+[ext_resource type="FontFile" uid="uid://eeqaqxih3dw7" path="res://fonts/pixelated-elegance-font/PixelatedEleganceRegular-ovawB.ttf" id="2_8giny"]
+
+[node name="Victory screen" type="Node2D" unique_id=305507337]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2019359397]
+offset_right = 160.0
+offset_bottom = 144.0
+texture = ExtResource("1_kc4hn")
+
+[node name="Game Over Text" type="Label" parent="." unique_id=1391391670]
+offset_left = 31.0
+offset_top = 71.0
+offset_right = 141.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+theme_override_colors/font_outline_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_8giny")
+theme_override_font_sizes/font_size = 5
+text = "You win
+sorry you played it
+big time procrastination"
+horizontal_alignment = 1

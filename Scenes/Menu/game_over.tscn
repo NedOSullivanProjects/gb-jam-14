@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dga5whheuoqdf"]
+
+[ext_resource type="Texture2D" uid="uid://dyjd6fcpmcjlt" path="res://intro.png" id="1_8ykay"]
+[ext_resource type="FontFile" uid="uid://eeqaqxih3dw7" path="res://fonts/pixelated-elegance-font/PixelatedEleganceRegular-ovawB.ttf" id="2_s5di5"]
+[ext_resource type="Script" uid="uid://b4as1y5eprhw8" path="res://Scenes/Menu/press_start_to_reload.gd" id="3_8ykay"]
+
+[node name="GameOver" type="Node2D" unique_id=1559172152]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1092478646]
+offset_right = 160.0
+offset_bottom = 144.0
+texture = ExtResource("1_8ykay")
+
+[node name="Game Over Text" type="Label" parent="TextureRect" unique_id=2052889316]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 79.0
+offset_right = 113.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+theme_override_colors/font_outline_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_s5di5")
+theme_override_font_sizes/font_size = 5
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Press Start" type="Label" parent="TextureRect" unique_id=1178507708]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 85.0
+offset_right = 124.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+theme_override_colors/font_outline_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_s5di5")
+theme_override_font_sizes/font_size = 5
+text = "Press Start To Retry"
+horizontal_alignment = 1
+script = ExtResource("3_8ykay")
+
+[node name="Timer" type="Timer" parent="TextureRect/Press Start" unique_id=1615842765]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="TextureRect/Press Start/Timer" to="TextureRect/Press Start" method="_on_timer_timeout"]

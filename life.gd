@@ -25,7 +25,10 @@ func _on_health_component_damage_taken(oldHealth: Variant, newHealth: Variant) -
 		healthPaths.append(healthList[i].get_path()) #Turns those nodes into a list of paths to that node
 	var healthToChange = oldHealth - newHealth
 	for i in range (0, healthToChange):
+		print(healthPaths)
 		var Temp = get_node(healthPaths.pop_back()) #Gives temp the node path of the furthest right health icon
+		#if healthPaths.is_empty():
+			
 		Temp.queue_free() #Clears the node path stored in temp
 	
 	#comment of shame

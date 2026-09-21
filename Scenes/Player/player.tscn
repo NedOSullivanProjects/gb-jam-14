@@ -69,7 +69,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0u5uq")
 }, {
-"duration": 3.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_jlvik")
 }],
 "loop": 0,
@@ -91,7 +91,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jhyir")
 }, {
-"duration": 3.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_74mp2")
 }],
 "loop": 0,
@@ -125,7 +125,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s71dy"]
-size = Vector2(13, 27)
+size = Vector2(13, 23)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdom2"]
 radius = 5.0
@@ -149,10 +149,10 @@ metadata/_edit_group_ = true
 texture_filter = 1
 position = Vector2(0, 2.3841858e-07)
 sprite_frames = SubResource("SpriteFrames_x1b0w")
-animation = &"attack"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1020399576]
-position = Vector2(-0.5, -0.5)
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_s71dy")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1178028175]
@@ -160,8 +160,8 @@ shape = SubResource("RectangleShape2D_s71dy")
 [node name="FmodListener2D" type="FmodListener2D" parent="Camera2D" unique_id=1823473559]
 
 [node name="StandingHitbox" type="Area2D" parent="." unique_id=1672228629]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 514
+collision_mask = 514
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StandingHitbox" unique_id=1472465968]
 shape = SubResource("CapsuleShape2D_fdom2")
@@ -222,6 +222,7 @@ rightPos = Vector2(8, -4)
 
 [connection signal="changeFacingDirection" from="." to="CrouchAttackHitbox/CollisionShape2D" method="_on_player_change_facing_direction"]
 [connection signal="changeFacingDirection" from="." to="StandAttackHitbox/CollisionShape2D" method="_on_player_change_facing_direction"]
+[connection signal="area_entered" from="StandingHitbox" to="." method="_on_standing_hitbox_area_entered"]
 [connection signal="body_entered" from="StandingHitbox" to="." method="_on_standing_hitbox_body_entered"]
 [connection signal="body_exited" from="StandingHitbox" to="." method="_on_standing_hitbox_body_exited"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]

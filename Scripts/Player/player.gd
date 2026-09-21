@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var currentHealth = maxHealth
 var gold = 0
 const SPEED = 50.0
-const JUMP_VELOCITY = -250.0#Temp values should be changed
+const JUMP_VELOCITY = -200.0#Temp values should be changed
 var lastXVelocity = 0
 var isAttacking = false
 var maxJumps = 1
@@ -31,7 +31,9 @@ func _physics_process(delta: float) -> void:
 
 		
 	# Handle jump.
-	if not isAttacking:
+	if isAttacking and is_on_floor():
+		velocity.x = 0
+	elif not isAttacking:
 		if Input.is_action_just_pressed("A Button") and is_on_floor(): #and not got double jump power
 			jumpsedUsed += 1
 			print(jumpsedUsed)
@@ -156,7 +158,7 @@ func _ready() -> void:
 	$CrouchAttackHitbox/CollisionShape2D.set_deferred("disabled", true)
 	$AnimatedSprite2D.animation = "walk"
 	isAttacking = false
-	
+	$HealthComponent.SetMaxHealth(maxHealth)
 
 func _on_invuln_timer_timeout() -> void: #Stops invulnerability animation from playing and makes player vulnerable again
 	recently_hit = false
@@ -208,5 +210,10 @@ func add_gold(amount: int):
 	gotGold.emit(gold)
 
 
+
 func _on_crouching_hitbox_body_entered(body: Node2D) -> void:
 	onHitboxDamage = true
+
+
+func _on_standing_hitbox_area_entered(area: Area2D) -> void:
+	$HealthComponent.dieded()

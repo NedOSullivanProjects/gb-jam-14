@@ -23,10 +23,13 @@ func InitialiseHealth() -> void:
 func TakeDamage(changeBy: int) ->void:
 	var oldHealth = currentHealth
 	currentHealth -= changeBy
-	damage_taken.emit(oldHealth, currentHealth)
+	print("current health is" + str(currentHealth))
 	if currentHealth == 0:
 		died.emit()
-	
+	damage_taken.emit(oldHealth, currentHealth)
+
+
+
 func HealDamage(changeBy: int) ->void:
 	var oldHealth = currentHealth
 	currentHealth += changeBy
@@ -34,6 +37,11 @@ func HealDamage(changeBy: int) ->void:
 
 func SetMaxHealth(health:int)-> void:
 	maxHealth = health
+	if maxHealth < currentHealth:
+		InitialiseHealth()
 	
 func changeMaxHealth(changeBy:int)-> void:
 	maxHealth += changeBy
+	
+func dieded():
+	died.emit()
