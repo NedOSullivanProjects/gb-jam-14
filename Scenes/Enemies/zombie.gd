@@ -35,3 +35,11 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	direction = $Pathfinding.simpleFindPath(self.global_position)
 	$AnimatedSprite2D.flip_h = direction.x > 0
 	$AnimatedSprite2D.play()
+
+
+
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	print("zombie hit")
+	self.queue_free()

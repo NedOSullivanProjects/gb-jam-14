@@ -6,12 +6,13 @@ var gold = 0
 const SPEED = 50.0
 const JUMP_VELOCITY = -250.0#Temp values should be changed
 var lastXVelocity = 0
-
+var isAttacking = false
 var maxJumps = 1
 var jumpsedUsed = 0
 var direction = 1
 var onHitboxDamage = false
 
+signal changeFacingDirection(facingRight: bool)
 signal spikes #used to signal player has taken damage from spikes
 
 var recently_hit = false #this will be used to give the player invulnerability frames
@@ -30,60 +31,67 @@ func _physics_process(delta: float) -> void:
 
 		
 	# Handle jump.
-	if Input.is_action_just_pressed("A Button") and is_on_floor(): #and not got double jump power
-		jumpsedUsed += 1
-		print(jumpsedUsed)
-		velocity.y = JUMP_VELOCITY
-		var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
-		if direction:
-			lastXVelocity = direction * SPEED
+	if not isAttacking:
+		if Input.is_action_just_pressed("A Button") and is_on_floor(): #and not got double jump power
+			jumpsedUsed += 1
+			print(jumpsedUsed)
+			velocity.y = JUMP_VELOCITY
+			var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
+			if direction:
+				lastXVelocity = direction * SPEED
+				velocity.x = lastXVelocity
+				#print(velocity.x)
+			else:
+				lastXVelocity = 0
+				
+		if jumpsedUsed > 0:
+			jump_animation()
 			velocity.x = lastXVelocity
-			#print(velocity.x)
-		else:
-			lastXVelocity = 0
-			
-	if jumpsedUsed > 0:
-		jump_animation()
-		velocity.x = lastXVelocity
 
-	
-	#print(velocity.x)
-	if Input.is_action_pressed("Up D-Pad") and Input.is_action_just_pressed("B Button"):
-		#perform second selected attack
-		pass
+		if Input.is_action_just_pressed("B Button") and not is_on_floor():
+			standAttack()
+			pass
+		#print(velocity.x)
+		#if Input.is_action_pressed("Up D-Pad") and Input.is_action_just_pressed("B Button"):
+			##perform second selected attack
+			#pass
+			
+		elif Input.is_action_just_pressed("B Button") and Input.is_action_pressed("Down D-Pad") and is_on_floor():
+			crouchAttack()
+			
+			
+		elif Input.is_action_just_pressed("B Button") and is_on_floor():
+			standAttack()
+			
+		#if Input.is_action_just_pressed("Select"):
+			##switch second weapon
+			#pass
 		
-	elif Input.is_action_just_pressed("B Button"):
-		#handle attacking
-		pass
-		
-	if Input.is_action_just_pressed("Select"):
-		#switch second weapon
-		pass
-	
-	if Input.is_action_pressed("Down D-Pad") and is_on_floor():
-		velocity.x = 0
-		$AnimatedSprite2D.animation = "crouch"
-		$StandingHitbox/CollisionShape2D.disabled = true
-		$CrouchingHitbox/CollisionShape2D.disabled = false
-		pass
-	elif is_on_floor():
-		$StandingHitbox/CollisionShape2D.disabled = false
-		$CrouchingHitbox/CollisionShape2D.disabled = true
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
-		if direction:
-			velocity.x = direction * SPEED
-			$AnimatedSprite2D.animation = "walk"
-			$AnimatedSprite2D.play()
-			$AnimatedSprite2D.flip_h = velocity.x > 0
-		else:
-			#velocity.x = move_toward(velocity.x, 0, SPEED)
-			$AnimatedSprite2D.animation = "still"
+		elif Input.is_action_pressed("Down D-Pad") and is_on_floor():
 			velocity.x = 0
-	else:
-		$StandingHitbox/CollisionShape2D.disabled = false
-		$CrouchingHitbox/CollisionShape2D.disabled = true
+			$AnimatedSprite2D.animation = "crouch"
+			$StandingHitbox/CollisionShape2D.disabled = true
+			$CrouchingHitbox/CollisionShape2D.disabled = false
+			
+		elif is_on_floor():
+			$StandingHitbox/CollisionShape2D.disabled = false
+			$CrouchingHitbox/CollisionShape2D.disabled = true
+			# Get the input direction and handle the movement/deceleration.
+			# As good practice, you should replace UI actions with custom gameplay actions.
+			var direction := Input.get_axis("Left D-Pad", "Right D-Pad")
+			if direction:
+				velocity.x = direction * SPEED
+				$AnimatedSprite2D.animation = "walk"
+				$AnimatedSprite2D.play()
+				$AnimatedSprite2D.flip_h = velocity.x > 0
+				emit_signal("changeFacingDirection", $AnimatedSprite2D.flip_h)
+			else:
+				#velocity.x = move_toward(velocity.x, 0, SPEED)
+				$AnimatedSprite2D.animation = "still"
+				velocity.x = 0
+		else:
+			$StandingHitbox/CollisionShape2D.disabled = false
+			$CrouchingHitbox/CollisionShape2D.disabled = true
 	move_and_slide()
 
 		#Is move_and_slide correct?
@@ -101,6 +109,22 @@ func _on_standing_hitbox_body_entered(body: Node2D) -> void:
 	#elif recently_hit: #if the player is currently invulnerable, skips function
 		#
 		#pass
+
+func standAttack():
+	isAttacking = true
+	$StandAttackHitbox/CollisionShape2D.set_deferred("disabled",false)
+	$AnimatedSprite2D.play("attack")
+	await $AnimatedSprite2D.animation_finished
+	$StandAttackHitbox/CollisionShape2D.set_deferred("disabled",true)
+	isAttacking = false
+
+func crouchAttack():
+	isAttacking = true
+	$CrouchAttackHitbox/CollisionShape2D.set_deferred("disabled",false)
+	$AnimatedSprite2D.play("crouch attack")
+	await $AnimatedSprite2D.animation_finished
+	$CrouchAttackHitbox/CollisionShape2D.set_deferred("disabled",true)
+	isAttacking= false
 
 func _process(delta:float) -> void:
 	if onHitboxDamage:
@@ -124,6 +148,14 @@ func _process(delta:float) -> void:
 			pass
 	if is_on_floor():
 		onFloor.emit()
+
+
+
+func _ready() -> void:
+	$StandAttackHitbox/CollisionShape2D.set_deferred("disabled", true)
+	$CrouchAttackHitbox/CollisionShape2D.set_deferred("disabled", true)
+	$AnimatedSprite2D.animation = "walk"
+	isAttacking = false
 	
 
 func _on_invuln_timer_timeout() -> void: #Stops invulnerability animation from playing and makes player vulnerable again
@@ -174,3 +206,7 @@ func add_gold(amount: int):
 	gold += amount
 	#print("got here")
 	gotGold.emit(gold)
+
+
+func _on_crouching_hitbox_body_entered(body: Node2D) -> void:
+	onHitboxDamage = true
